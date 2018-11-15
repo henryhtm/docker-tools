@@ -1,13 +1,14 @@
 FROM henryhtm/ubuntu-tools:basic
 RUN  wget -O /tmp/hbase.tar.gz http://mirrors.hust.edu.cn/apache/hbase/2.0.2/hbase-2.0.2-bin.tar.gz && tar -xvf /tmp/hbase.tar.gz -C /mnt/ \
      && for hb in `find /mnt/ -maxdepth 1 -name "hbase*"` ; do mv $hb /usr/local/hbase ; done && rm /usr/local/hbase/docs -rf && rm /tmp/hbase.tar.gz -rf
-RUN  apt-get update && apt-get install -y openjdk-8-jdk
-ENV  JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
-ENV  PS1="\u@\w\a#"
 ENV  PATH="/usr/local/hbase/bin:"$PATH
 RUN  echo "export HBASE_MANAGES_ZK=true">>/usr/local/hbase/conf/hbase-env.sh \
      && echo "export JAVA_HOME='/usr/lib/jvm/java-8-openjdk-amd64'" >> /usr/local/hbase/conf/hbase-env.sh
-COPY file/hbase-site.xml /usr/local/hbase/conf/hbase-site.xml
-COPY file/cmd.sh /mnt/cmd.sh
+RUN  apt-get update && apt-get install -y openjdk-8-jdk
 RUN  mkdir /mnt/hbase-dir && chmod 777 /mnt/* -R && chmod 777 /usr/local/hbase -R
+ENV  JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+ENV  PS1="\u@\w\a#"
+COPY file/hbase-site.xml /usr/local/hbase/conf/hbase-site.xml
+COPY file/phoenix-5.0.0-HBase-2.0-server.jar /usr/local/hbase/lib/phoenix-5.0.0-HBase-2.0-server.jar
+COPY file/cmd.sh /mnt/cmd.sh
 CMD  ["/mnt/cmd.sh"]
