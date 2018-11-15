@@ -2,11 +2,24 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <configuration>
 <property>
-    <name>hbase.rootdir</name>
-    <value>file:/mnt/hbase-dir/</value>
+<name>hbase.rootdir</name>
+<value>file:///mnt/hbase-dir/hbase</value>
 </property>
 <property>
-    <name>hbase.zookeeper.property.dataDir</name>
-    <value>file:/mnt/hbase-dir/</value>
+<name>hbase.tmp.dir</name>
+<value>/mnt/hbase-dir/hbase-tmp/</value>
+</property>
+<property>
+<name>hbase.zookeeper.property.clientPort</name>
+<value>2181</value>
+</property>
+<property>
+<name>hbase.zoopkeeper.property.dataDir</name>
+<value>/mnt/hbase-dir/zookeeper/</value>
+</property>
+<property>
+<name>zookeeper.session.timeout</name>
+<value>60000000</value>
 </property>
 </configuration>
+
