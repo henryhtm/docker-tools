@@ -1,0 +1,3 @@
+stop mysql-server
+stop mysql-server
+stopped by TERM
